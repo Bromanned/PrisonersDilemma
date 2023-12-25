@@ -8,7 +8,6 @@ function cooperate() {
     document.getElementById("defect").disabled = false;
     document.getElementById("selected").innerText = "COOPERATE";
     document.getElementById("selected").style.color = "green";
-    return;
 }
 
 function defect() {
@@ -16,6 +15,5 @@ function defect() {
     document.getElementById("defect").disabled = true;
     document.getElementById("selected").innerText = "DEFECT";
     document.getElementById("selected").style.color = "red";
-    return;
 }
 
