@@ -19,30 +19,3 @@ function defect() {
     return;
 }
 
-const Update = {
-    new: function (updateType, data) {
-        let updateToSend = {
-            type: updateType,
-            data: data
-        }
-
-        updateToSend = JSON.stringify(updateToSend);
-        return updateToSend;
-    },
-    
-    interpret: function (incoming) {
-        try {
-            var message = JSON.parse(incoming);
-            switch (message.type) {
-                case "UserJoined":
-                    
-                    break;
-                case "Choice":
-                    
-                    break;
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
