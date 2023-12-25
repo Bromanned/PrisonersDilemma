@@ -17,3 +17,38 @@ function defect() {
     document.getElementById("selected").style.color = "red";
 }
 
+const Update = {
+    new: function (updateType, data) {
+        let updateToSend = {
+            type: updateType,
+            data: data
+        }
+
+        updateToSend = JSON.stringify(updateToSend);
+        return updateToSend;
+    },
+    
+    interpret: function (incoming) {
+        try {
+            var incomingUpdate = JSON.parse(incoming);
+            switch (incomingUpdate.type) {
+                case "UserJoined":
+                    
+                    break;
+                case "Choice":
+                    
+                    break;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+function updateInfo(user) {
+    if (user == null) {
+        document.getElementById("info").innerText = "Waiting for other players to join...";
+    } else {
+        document.getElementById("info").innerText = "Playing Against " + user;
+    }
+}
