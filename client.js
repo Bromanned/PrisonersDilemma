@@ -36,7 +36,7 @@ function defect() {
 const Update = {
     new: function (type, sender, choice) {
         let updateToSend = {
-            type: updateType,
+            type: type,
             sender: sender,
             choice: choice
         }
