@@ -10,6 +10,7 @@ connection.onopen = function () {
     }
     
     connection.send(Update.new("UserJoin", username, null));
+    document.getElementById("username").innerText = "Username: " + username;
 }
 
 connection.onmessage = function (update) {
