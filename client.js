@@ -8,7 +8,7 @@ function cooperate() {
     document.getElementById("defect").disabled = false;
     let selected = document.getElementById("selected");
     selected.innerText = "COOPERATE";
-    selected.style.color = "green";
+    //selected.style.color = "green";
 }
 
 function defect() {
@@ -16,7 +16,7 @@ function defect() {
     document.getElementById("defect").disabled = true;
     let selected = document.getElementById("selected");
     selected.innerText = "DEFECT";
-    selected.style.color = "red";
+    //selected.style.color = "red";
 }
 
 const Update = {
