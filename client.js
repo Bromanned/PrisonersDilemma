@@ -80,5 +80,5 @@ function updatePoints(enemyChoice) {
         points += 1;
     }
 
-    document.getElementById("points").innerText = "Points: " + points;
+    document.getElementById("points").innerText = "Points: " + points + " ";
 }
