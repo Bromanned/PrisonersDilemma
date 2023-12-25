@@ -6,17 +6,15 @@ let username = "Client " + Math.floor(Math.random() * 1000000);
 function cooperate() {
     document.getElementById("cooperate").disabled = true;
     document.getElementById("defect").disabled = false;
-    let selected = document.getElementById("selected");
-    selected.innerText = "COOPERATE";
-    //selected.style.color = "green";
+    document.getElementById("selected").innerText = "COOPERATE";
+    document.getElementById("selected").style.color = "green";
 }
 
 function defect() {
     document.getElementById("cooperate").disabled = false;
     document.getElementById("defect").disabled = true;
-    let selected = document.getElementById("selected");
-    selected.innerText = "DEFECT";
-    //selected.style.color = "red";
+    document.getElementById("selected").innerText = "DEFECT";
+    document.getElementById("selected").style.color = "red";
 }
 
 const Update = {
