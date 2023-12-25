@@ -4,13 +4,13 @@ let username = "Client " + Math.floor(Math.random() * 1000000);
 
 
 function cooperate() {
-    document.getElementById("cooperateBtn").disabled = true;
-    document.getElementById("defectBtn").disabled = false;
+    document.getElementById("cooperate").disabled = true;
+    document.getElementById("defect").disabled = false;
     document.getElementById("selected").innerText = "COOPERATE";
 }
 
 function defect() {
-    document.getElementById("cooperateBtn").disabled = false;
-    document.getElementById("defectBtn").disabled = true;
+    document.getElementById("cooperate").disabled = false;
+    document.getElementById("defect").disabled = true;
     document.getElementById("selected").innerText = "DEFECT";
 }
