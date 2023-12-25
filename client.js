@@ -1,7 +1,22 @@
-//let connection = new WebSocket('wss://PrisonersDilemma.Bromanned.repl.co', "this-is-probably-a-protocol");
+let connection = new WebSocket('wss://PrisonersDilemma.Bromanned.repl.co', "this-is-probably-a-protocol");
 
 let username = "Client " + Math.floor(Math.random() * 1000000);
+let points = 0;
 
+connection.onopen = function () {
+    usernamePrompt = prompt("Please enter a username before playing.");
+    if (usernamePrompt != "" && usernamePrompt != null) {
+        username = usernamePrompt;
+    }
+    
+    connection.send(Update.new("UserJoin", username, null));
+}
+
+connection.onmessage = function (update) {
+    Update.interpret(update.data.toString());
+}
+
+//connection.onclose = function
 
 function cooperate() {
     document.getElementById("cooperate").disabled = true;
@@ -21,7 +36,8 @@ const Update = {
     new: function (updateType, data) {
         let updateToSend = {
             type: updateType,
-            data: data
+            sender: sender,
+            choice: choice
         }
 
         updateToSend = JSON.stringify(updateToSend);
@@ -32,11 +48,11 @@ const Update = {
         try {
             var incomingUpdate = JSON.parse(incoming);
             switch (incomingUpdate.type) {
-                case "UserJoined":
-                    
+                case "UserJoin":
+                    updateInfo(incomingUpdate.sender)
                     break;
                 case "Choice":
-                    
+                    updatePoints(incomingUpdate.choice)
                     break;
             }
         } catch (error) {
@@ -51,4 +67,17 @@ function updateInfo(user) {
     } else {
         document.getElementById("info").innerText = "Playing Against " + user;
     }
+}
+
+function updatePoints(enemyChoice) {
+    let youreGood = document.getElementById("selected").innerText == "COOPERATE"
+    if (enemyChoice == "COOPERATE" && youreGood) {
+        points += 3;
+    } else if (enemyChoice == "COOPERATE" && !youreGood) {
+        points += 5;
+    } else if (enemyChoice == "DEFECT" && !youreGood) {
+        points += 1;
+    }
+
+    document.getElementById("points").innerText = "Points: " + points;
 }
