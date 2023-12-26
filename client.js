@@ -14,8 +14,8 @@ connection.onopen = function () {
 }
 
 connection.onmessage = function (update) {
-    alert("Update: " + update);
-    alert("toString: " + update.data.toString());
+    //alert("Update: " + update);
+    //alert("toString: " + update.data.toString());
     Update.interpret(update.data.toString());
 }
 
@@ -48,7 +48,7 @@ const Update = {
         }
 
         updateToSend = JSON.stringify(updateToSend);
-        alert("Sent: " + updateToSend);
+        //alert("Sent: " + updateToSend);
         return updateToSend;
     },
     
@@ -75,7 +75,7 @@ function updateInfo(user, choice) {
         document.getElementById("info").innerText = "Waiting for other players to join...";
     } else {
         var oldUser = document.getElementById("info").innerText;
-        oldUser = currentText.replace('Playing Against: ','');
+        oldUser = oldUser.replace('Playing Against: ','');
         
         if (user.toString() != oldUser) {
             document.getElementById("info").innerText = "Playing Against " + user;
