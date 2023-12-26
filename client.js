@@ -48,7 +48,7 @@ const Update = {
         }
 
         updateToSend = JSON.stringify(updateToSend);
-        alert(upsateToSend);
+        alert(updateToSend);
         return updateToSend;
     },
     
