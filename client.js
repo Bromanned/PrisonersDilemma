@@ -3,6 +3,7 @@ let connection = new WebSocket('wss://PrisonersDilemma.Bromanned.repl.co', "this
 let username = "Client " + Math.floor(Math.random() * 1000000);
 let currentChoice = null;
 let enemy = null;
+let amReady = null;
 let points = 0;
 
 connection.onopen = function () {
@@ -42,6 +43,7 @@ function defect() {
 }
 
 function ready() {
+    amReady = true;
     connection.send(Update.new("Choice", username, currentChoice));
 }
 
@@ -95,14 +97,18 @@ function updateInfo(user, choice) {
 }
 
 function updatePoints(enemyChoice) {
-    let youreGood = document.getElementById("selected").innerText == "COOPERATE"
-    if (enemyChoice == "COOPERATE" && youreGood) {
-        points += 3;
-    } else if (enemyChoice == "COOPERATE" && !youreGood) {
-        points += 5;
-    } else if (enemyChoice == "DEFECT" && !youreGood) {
-        points += 1;
+    if (amReady) {
+        let youreGood = document.getElementById("selected").innerText == "COOPERATE"
+        if (enemyChoice == "COOPERATE" && youreGood) {
+            points += 3;
+        } else if (enemyChoice == "COOPERATE" && !youreGood) {
+            points += 5;
+        } else if (enemyChoice == "DEFECT" && !youreGood) {
+            points += 1;
+        }
+        
+        document.getElementById("points").innerText = "Points: " + points + " ";
+        connection.send(Update.new("Choice", username, currentChoice));
+        amReady = false;
     }
-
-    document.getElementById("points").innerText = "Points: " + points + " ";
 }
