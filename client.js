@@ -87,8 +87,8 @@ function updateInfo(user, choice) {
         //oldUser = oldUser.replace('Playing Against: ','');
         
         if (user.toString() != enemy) {
-            alert(user.toString());
-            alert(enemy);
+            //alert(user.toString());
+            //alert(enemy);
             document.getElementById("info").innerText = "Playing Against " + user;
             connection.send(Update.new("UserChange", username, "extraUpdate"));
             enemy = user.toString();
