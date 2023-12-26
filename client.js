@@ -24,6 +24,7 @@ function cooperate() {
     document.getElementById("defect").disabled = false;
     document.getElementById("selected").innerText = "COOPERATE";
     document.getElementById("selected").style.color = "green";
+    connection.send(Update.new("Choice", username, "COOPERATE"));
 }
 
 function defect() {
@@ -31,6 +32,7 @@ function defect() {
     document.getElementById("defect").disabled = true;
     document.getElementById("selected").innerText = "DEFECT";
     document.getElementById("selected").style.color = "red";
+    connection.send(Update.new("Choice", username, "DEFECT"));
 }
 
 const Update = {
