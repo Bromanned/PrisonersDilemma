@@ -1,6 +1,7 @@
 let connection = new WebSocket('wss://PrisonersDilemma.Bromanned.repl.co', "this-is-probably-a-protocol");
 
 let username = "Client " + Math.floor(Math.random() * 1000000);
+let currentChoice = null;
 let points = 0;
 
 connection.onopen = function () {
@@ -28,7 +29,7 @@ function cooperate() {
     document.getElementById("defect").disabled = false;
     document.getElementById("selected").innerText = "COOPERATE";
     document.getElementById("selected").style.color = "green";
-    connection.send(Update.new("Choice", username, "COOPERATE"));
+    currentChoice = "COOPERATE";
 }
 
 function defect() {
@@ -36,7 +37,11 @@ function defect() {
     document.getElementById("defect").disabled = true;
     document.getElementById("selected").innerText = "DEFECT";
     document.getElementById("selected").style.color = "red";
-    connection.send(Update.new("Choice", username, "DEFECT"));
+    currentChoice = "DEFECT";
+}
+
+function ready() {
+    connection.send(Update.new("Choice", username, currentChoice));
 }
 
 const Update = {
