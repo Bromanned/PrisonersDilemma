@@ -15,8 +15,8 @@ connection.onopen = function () {
 
 connection.onmessage = function (update) {
     alert(update);
-    alert(update.data.toString());
-    Update.interpret(update.data.toString());
+    //alert(update.data.toString());
+    Update.interpret(update);
 }
 
 connection.onclose = function (e) {
@@ -48,7 +48,7 @@ const Update = {
         }
 
         updateToSend = JSON.stringify(updateToSend);
-        alert(updateToSend);
+        //alert(updateToSend);
         return updateToSend;
     },
     
