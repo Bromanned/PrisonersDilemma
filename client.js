@@ -15,7 +15,7 @@ connection.onopen = function () {
 
 connection.onmessage = function (update) {
     alert(update);
-    //alert(update.data.toString());
+    alert(update.data.toString());
     Update.interpret(update);
 }
 
@@ -48,7 +48,7 @@ const Update = {
         }
 
         updateToSend = JSON.stringify(updateToSend);
-        //alert(updateToSend);
+        alert(updateToSend);
         return updateToSend;
     },
     
@@ -58,7 +58,7 @@ const Update = {
             if (incomingUpdate.sender == username) return;
             switch (incomingUpdate.type) {
                 case "UserChange":
-                    updateInfo(incomingUpdate.sender,incomingUpdate.choice)
+                    updateInfo(incomingUpdate.sender, incomingUpdate.choice)
                     break;
                 case "Choice":
                     updatePoints(incomingUpdate.choice)
