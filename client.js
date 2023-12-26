@@ -9,7 +9,7 @@ connection.onopen = function () {
         username = usernamePrompt;
     }
     
-    connection.send(Update.new("UserJoin", username, null));
+    connection.send(JSON.Stringify(Update.new("UserChange", username, null)));
     document.getElementById("username").innerText = "Username: " + username;
 }
 
@@ -18,7 +18,9 @@ connection.onmessage = function (update) {
     Update.interpret(update);
 }
 
-//connection.onclose = function
+connection.onclose = function () {
+    connection.send(JSON.Stringify(Update.new("UserChange", username, "left")));
+}
 
 function cooperate() {
     document.getElementById("cooperate").disabled = true;
@@ -51,9 +53,10 @@ const Update = {
     interpret: function (incoming) {
         try {
             var incomingUpdate = JSON.parse(incoming);
+            if (incomingUpdate.sender == username) return;
             switch (incomingUpdate.type) {
-                case "UserJoin":
-                    updateInfo(incomingUpdate.sender)
+                case "UserChange":
+                    updateInfo(incomingUpdate.sender, incomingUpdate.choice)
                     break;
                 case "Choice":
                     updatePoints(incomingUpdate.choice)
@@ -65,8 +68,8 @@ const Update = {
     }
 }
 
-function updateInfo(user) {
-    if (user == null) {
+function updateInfo(user, choice) {
+    if (user == null || (user != null && choice == "left")) {
         document.getElementById("info").innerText = "Waiting for other players to join...";
     } else {
         document.getElementById("info").innerText = "Playing Against " + user;
