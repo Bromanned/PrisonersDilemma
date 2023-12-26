@@ -2,6 +2,7 @@ let connection = new WebSocket('wss://PrisonersDilemma.Bromanned.repl.co', "this
 
 let username = "Client " + Math.floor(Math.random() * 1000000);
 let currentChoice = null;
+let enemy = null;
 let points = 0;
 
 connection.onopen = function () {
@@ -79,14 +80,14 @@ function updateInfo(user, choice) {
     if (user == null || (user != null && choice == "disconnect")) {
         document.getElementById("info").innerText = "Waiting for other players to join...";
     } else {
-        var oldUser = document.getElementById("info").innerText;
-        oldUser = oldUser.replace('Playing Against: ','');
+        //var oldUser = document.getElementById("info").innerText;
+        //oldUser = oldUser.replace('Playing Against: ','');
         
-        if (user.toString() != oldUser) {
+        if (user.toString() != enemy.toString()) {
             alert(user.toString());
-            alert(oldUser);
+            alert(enemy);
             document.getElementById("info").innerText = "Playing Against " + user;
-            //connection.send(Update.new("UserChange", username, "extraUpdate"));
+            connection.send(Update.new("UserChange", username, "extraUpdate"));
         }
     }
 }
