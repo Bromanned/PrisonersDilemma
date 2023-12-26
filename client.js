@@ -79,7 +79,7 @@ function updateInfo(user, choice) {
         
         if (user.toString() != oldUser) {
             document.getElementById("info").innerText = "Playing Against " + user;
-            connection.send(Update.new("UserChange", username, "extraUpdate");
+            connection.send(Update.new("UserChange", username, "extraUpdate"));
         }
     }
 }
