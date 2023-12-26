@@ -74,7 +74,13 @@ function updateInfo(user, choice) {
     if (user == null || (user != null && choice == "disconnect")) {
         document.getElementById("info").innerText = "Waiting for other players to join...";
     } else {
-        document.getElementById("info").innerText = "Playing Against " + user;
+        var oldUser = document.getElementById("info").innerText;
+        oldUser = currentText.replace('Playing Against: ','');
+        
+        if (user.toString() != oldUser) {
+            document.getElementById("info").innerText = "Playing Against " + user;
+            connection.send(Update.new("UserChange", username, "extraUpdate");
+        }
     }
 }
 
