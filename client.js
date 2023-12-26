@@ -14,6 +14,7 @@ connection.onopen = function () {
 }
 
 connection.onmessage = function (update) {
+    alert(update);
     alert(JSON.parse(update));
     Update.interpret(update);
 }
