@@ -9,17 +9,17 @@ connection.onopen = function () {
         username = usernamePrompt;
     }
     
-    connection.send(JSON.Stringify(Update.new("UserChange", username, null)));
+    connection.send(Update.new("UserChange", username, null));
     document.getElementById("username").innerText = "Username: " + username;
 }
 
 connection.onmessage = function (update) {
-    alert(JSON.parse(update).toString());
+    alert(JSON.parse(update));
     Update.interpret(update);
 }
 
-connection.onclose = function () {
-    connection.send(JSON.Stringify(Update.new("UserChange", username, "left")));
+connection.onclose = function (e) {
+    connection.send(Update.new("UserChange", username, "left"));
 }
 
 function cooperate() {
