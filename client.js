@@ -15,7 +15,7 @@ connection.onopen = function () {
 
 connection.onmessage = function (update) {
     alert(update);
-    Update.interpret(update);
+    Update.interpret(update.data.toString());
 }
 
 connection.onclose = function (e) {
