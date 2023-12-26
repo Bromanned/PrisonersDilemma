@@ -14,8 +14,8 @@ connection.onopen = function () {
 }
 
 connection.onmessage = function (update) {
-    alert(JSON.parse(update.data.toString()));
-    Update.interpret(update.data.toString());
+    alert(JSON.parse(update.toString()));
+    Update.interpret(update.toString());
 }
 
 //connection.onclose = function
