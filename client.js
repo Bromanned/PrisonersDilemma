@@ -79,15 +79,17 @@ const Update = {
 function updateInfo(user, choice) {
     if (user == null || (user != null && choice == "disconnect")) {
         document.getElementById("info").innerText = "Waiting for other players to join...";
+        enemy = null;
     } else {
         //var oldUser = document.getElementById("info").innerText;
         //oldUser = oldUser.replace('Playing Against: ','');
         
-        if (user.toString() != enemy.toString()) {
+        if (user.toString() != enemy) {
             alert(user.toString());
             alert(enemy);
             document.getElementById("info").innerText = "Playing Against " + user;
             connection.send(Update.new("UserChange", username, "extraUpdate"));
+            enemy = user.toString();
         }
     }
 }
