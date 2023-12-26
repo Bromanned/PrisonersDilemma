@@ -15,12 +15,11 @@ connection.onopen = function () {
 
 connection.onmessage = function (update) {
     alert(update);
-    alert(JSON.parse(update));
     Update.interpret(update);
 }
 
 connection.onclose = function (e) {
-    connection.send(Update.new("UserChange", username, "left"));
+    connection.send(Update.new("UserChange", username, "disconnect"));
 }
 
 function cooperate() {
@@ -47,20 +46,20 @@ const Update = {
             choice: choice
         }
 
-        updateToSend = JSON.stringify(updateToSend);
+        //updateToSend = JSON.stringify(updateToSend);
         return updateToSend;
     },
     
     interpret: function (incoming) {
         try {
-            var incomingUpdate = JSON.parse(incoming);
-            if (incomingUpdate.sender == username) return;
-            switch (incomingUpdate.type) {
+            //var incomingUpdate = JSON.parse(incoming);
+            if (incoming.sender == username) return;
+            switch (incoming.type) {
                 case "UserChange":
-                    updateInfo(incomingUpdate.sender, incomingUpdate.choice)
+                    updateInfo(incoming.sender, incoming.choice)
                     break;
                 case "Choice":
-                    updatePoints(incomingUpdate.choice)
+                    updatePoints(incoming.choice)
                     break;
             }
         } catch (error) {
@@ -70,7 +69,7 @@ const Update = {
 }
 
 function updateInfo(user, choice) {
-    if (user == null || (user != null && choice == "left")) {
+    if (user == null || (user != null && choice == "disconnect")) {
         document.getElementById("info").innerText = "Waiting for other players to join...";
     } else {
         document.getElementById("info").innerText = "Playing Against " + user;
