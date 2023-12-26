@@ -46,20 +46,20 @@ const Update = {
             choice: choice
         }
 
-        //updateToSend = JSON.stringify(updateToSend);
+        updateToSend = JSON.stringify(updateToSend);
         return updateToSend;
     },
     
     interpret: function (incoming) {
         try {
-            //var incomingUpdate = JSON.parse(incoming);
-            if (incoming.sender == username) return;
-            switch (incoming.type) {
+            var incomingUpdate = JSON.parse(incoming);
+            if (incomingUpdate.sender == username) return;
+            switch (incomingUpdate.type) {
                 case "UserChange":
-                    updateInfo(incoming.sender, incoming.choice)
+                    updateInfo(incomingUpdate.sender,incomingUpdate.choice)
                     break;
                 case "Choice":
-                    updatePoints(incoming.choice)
+                    updatePoints(incomingUpdate.choice)
                     break;
             }
         } catch (error) {
