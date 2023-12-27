@@ -5,6 +5,7 @@ let currentChoice = null;
 let enemy = null;
 let amReady = null;
 let points = 0;
+let roundNumber = 1;
 
 connection.onopen = function () {
     usernamePrompt = prompt("Please enter a username before playing.");
@@ -110,5 +111,7 @@ function updatePoints(enemyChoice) {
         document.getElementById("points").innerText = "Points: " + points + " ";
         connection.send(Update.new("Choice", username, currentChoice));
         amReady = false;
+        roundNumber++;
+        document.getElementById("points").innerText = "Round " + roundNumber;
     }
 }
