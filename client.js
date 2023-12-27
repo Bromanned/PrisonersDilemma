@@ -112,6 +112,6 @@ function updatePoints(enemyChoice) {
         connection.send(Update.new("Choice", username, currentChoice));
         amReady = false;
         roundNumber++;
-        document.getElementById("points").innerText = "Round " + roundNumber;
+        document.getElementById("round").innerText = "Round " + roundNumber;
     }
 }
